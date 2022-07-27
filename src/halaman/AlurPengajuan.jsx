@@ -4,21 +4,26 @@ import ".././style/beranda-pengajuan.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
-const Beranda = (props) => {
+const AlurPengajuan = (props) => {
   const [keyword, setKeyWord] = useState("");
   const navigate = useNavigate();
 
-  const [bantuan, setBantuan] = useState("");
-
-  const searchButtonHandlerDua = (e) => {
-    e.preventDefault();
-    navigate(`/hasilBantuan/${bantuan}`, { state: { kata: { bantuan } } });
-  };
-
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    navigate(`/hasil/${keyword}`, { state: { word: { keyword } } });
+    if (keyword.length) {
+      navigate(`/hasil/${keyword}`, { state: { word: { keyword } } });
+    } else {
+      return (
+        <div>
+          {Swal.fire({
+            icon: "error",
+            text: "NIK harus diisi !",
+          })}
+        </div>
+      );
+    }
   };
 
   return (
@@ -30,7 +35,7 @@ const Beranda = (props) => {
               <tr>
                 <td>
                   <div className="min-logo">
-                    SISTEM PENYALURAN DANA SANTUNAN KEMATIAN DAN BANTUAN
+                    SISTEM PENYALURAN DANA SANTUNAN KEMATIAN
                   </div>
                 </td>
                 <td align="right">
@@ -114,10 +119,10 @@ const Beranda = (props) => {
                     <br></br>
                   </div>
                   <div className="span5 form-box">
-                    <h4 style={{marginBottom: '10px'}}>CEK STATUS PERKEMBANGAN PENCAIRAN</h4>
+                    <h4 style={{color: 'gray'}}>CEK STATUS PENCAIRAN DANA SANTUNAN KEMATIAN</h4>
                     <div className="form">
                       <form id="mahasiswa-login">
-                        <label style={{ fontSize: '15px', marginTop: '15px'}}>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
+                        <label style={{fontSize: 14, fontWeight: 'bold'}}>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
                         <input
                           className="span12"
                           placeholder="NOMOR INDUK KEPENDUDUKAN"
@@ -140,38 +145,6 @@ const Beranda = (props) => {
                           name="yt0"
                         />
                       </form>
-                    </div>
-                    <br></br>
-                    <hr></hr>
-                    <br></br>
-                    <div>
-                      <h4>CEK STATUS PENCAIRAN DANA BANTUAN</h4>
-                      <div className="form">
-                        <form id="mahasiswa-login">
-                          <label>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
-                          <input
-                            className="span12"
-                            placeholder="NOMOR INDUK KEPENDUDUKAN"
-                            type="text"
-                            value={bantuan}
-                            id="PerkembanganPencairan_NIM"
-                            name="PerkembanganPencarian[NIM]"
-                            onChange={(event) => {
-                              setBantuan(event.target.value);
-                            }}
-                          />
-
-                          <br></br>
-
-                          <input
-                            onClick={searchButtonHandlerDua}
-                            className="btn btn-info btn-large btn-block"
-                            value="Lihat Perkembangan Pencarian"
-                            type="submit"
-                            name="yt0"
-                          />
-                        </form>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -200,4 +173,4 @@ const styles = {
   },
 };
 
-export default Beranda;
+export default AlurPengajuan;

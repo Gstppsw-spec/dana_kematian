@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../component/Navbar';
 import Topbar from '../component/Topbar';
 import '../style/list.scss'
-import HalamanDaftarKematian from './HalamanDaftarKematian';
+import DaftarKematian from './DaftarKematian';
 
 
 const ListKematian = () => {
@@ -11,7 +11,7 @@ const ListKematian = () => {
         <Navbar/>
         <div className='listContainer'>
             <Topbar/>
-            <HalamanDaftarKematian/>
+            <DaftarKematian/>
         </div>
     </div>
   )

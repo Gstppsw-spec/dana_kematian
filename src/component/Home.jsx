@@ -14,8 +14,6 @@ const Home = () => {
             <div className='widgets'>
               <Widget type="jumlah_kematian"/>
               <Widget type="anggaran_kematian" />
-              <Widget type="jumlah_bantuan" />
-              <Widget type="anggaran_bantuan" />
             </div>
         </div>
     </div>

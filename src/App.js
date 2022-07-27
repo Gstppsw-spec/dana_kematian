@@ -1,24 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.css";
-import Navbar from "./component/Navbar";
 import Login from "./component/Login";
-import Topbar from "./component/Topbar";
 import Home from "./component/Home";
 import "./style/dark.scss";
 import ListKematian from "./halaman/ListKematian";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import Tambah from "./halaman/Tambah";
-import Edit from "./halaman/Edit";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import User from "./halaman/User";
+import TambahKematian from "./halaman/TambahKematian";
+import EditKematian from "./halaman/EditKematian";
 import Beranda from "./halaman/Beranda";
 import HasilPengajuan from "./halaman/HasilPengajuan";
 import AlurPengajuan from "./halaman/AlurPengajuan";
-import DaftarBantuanHasil from "./halamanBantuan/DaftarBantuanHasil";
-import TambahBantuan from "./halamanBantuan/TambahBantuan"
-import UpdateBantuan from "./halamanBantuan/UpdateBantuan"
-import HasilBantuan from "./halaman/HasilBantuan"
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -30,18 +21,11 @@ function App() {
           <Route exact path="/alur-pengajuan" element={<AlurPengajuan/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/hasil/:word" element={<HasilPengajuan/>}/>
-          <Route exact path="/hasilBantuan/:kata" element={<HasilBantuan/>}/>
           <Route exact path="/dashboard" element={<Home />} />
-          <Route exact path="/user" element={<User/>}/>
-          <Route exact path="/bantuan">
-            <Route index element={<DaftarBantuanHasil/>}/>
-            <Route path="bantuan/baru" element={<TambahBantuan/>}/>
-            <Route path="bantuan/edit/:id" element={<UpdateBantuan/>}/>
-          </Route>
           <Route exact path="/kematian">
             <Route index element={<ListKematian/>}/>
-            <Route path="kematian/baru" element={<Tambah/>} title="Tambah Data Baru"/>
-            <Route path="kematian/edit/:id" element={<Edit/>}/>
+            <Route path="kematian/baru" element={<TambahKematian/>} title="Tambah Data Baru"/>
+            <Route path="kematian/edit/:id" element={<EditKematian/>}/>
           </Route>
         </Routes>
       </Router>

@@ -5,20 +5,26 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ResultCard = (props) => {
   const [keyword, setKeyWord] = useState("");
   const navigate = useNavigate();
-  const [bantuan, setBantuan] = useState("");
-
-  const searchButtonHandlerDua = (e) => {
-    e.preventDefault();
-    navigate(`/hasilBantuan/${bantuan}`, { state: { kata: { bantuan } } });
-  };
 
   const searchButtonHandler = (e) => {
     e.preventDefault();
-    navigate(`/hasil/${keyword}`, { state: { word: { keyword } } });
+    if (keyword.length) {
+      navigate(`/hasil/${keyword}`, { state: { word: { keyword } } });
+    } else {
+      return (
+        <div>
+          {Swal.fire({
+            icon: "error",
+            text: "NIK harus diisi !",
+          })}
+        </div>
+      );
+    }
   };
   return (
     <div>
@@ -69,14 +75,14 @@ const ResultCard = (props) => {
         <div style={{ minHeight: "400px" }}>
           <div style={{ marginTop: "10px" }}></div>
           <ul className="breadcrumb"></ul>
-          <h4>PERKEMBANGAN PENCAIRAN</h4>
+          <h4 style={{color: 'gray'}}>PERKEMBANGAN PENCAIRAN DANA SANTUNAN KEMATIAN</h4>
           <hr></hr>
           <div className="row-fluid">
             <div className="span5 form-box">
               <div className="form well">
                 <form id="mahasiswa-login">
                   <h5>CEK STATUS PENCAIRAN DANA SANTUNAN DUKA</h5>
-                  <label>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
+                  <label style={{fontSize: 14, fontWeight: 'bold'}}>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
                   <input
                     className="span12"
                     placeholder="NOMOR INDUK KEPENDUDUKAN"
@@ -93,35 +99,6 @@ const ResultCard = (props) => {
 
                   <input
                     onClick={searchButtonHandler}
-                    className="btn btn-info btn-large btn-block"
-                    value="Lihat Perkembangan Pencarian"
-                    type="submit"
-                    name="yt0"
-                  />
-                </form>
-
-                <br></br>
-                <hr></hr>
-                <br></br>
-                <h5>CEK STATUS PENCAIRAN DANA BANTUAN</h5>
-                <form id="mahasiswa-login">
-                  <label>NOMOR INDUK KEPENDUDUKAN (NIK)</label>
-                  <input
-                    className="span12"
-                    placeholder="NOMOR INDUK KEPENDUDUKAN"
-                    type="text"
-                    value={bantuan}
-                    id="PerkembanganPencairan_NIM"
-                    name="PerkembanganPencarian[NIM]"
-                    onChange={(event) => {
-                      setBantuan(event.target.value);
-                    }}
-                  />
-
-                  <br></br>
-
-                  <input
-                    onClick={searchButtonHandlerDua}
                     className="btn btn-info btn-large btn-block"
                     value="Lihat Perkembangan Pencarian"
                     type="submit"
